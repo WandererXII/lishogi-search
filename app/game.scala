@@ -21,9 +21,10 @@ object Fields {
   val duration      = "l"
   val clockInit     = "ct"
   val clockInc      = "ci"
+  val clockByo      = "cb"
   val analysed      = "n"
-  val whiteUser     = "wu"
-  val blackUser     = "bu"
+  val senteUser     = "su"
+  val goteUser      = "gu"
   val source        = "so"
 }
 
@@ -45,9 +46,10 @@ object Mapping {
       intField(duration) docValues false,
       intField(clockInit) docValues false,
       shortField(clockInc) docValues false,
+      shortField(clockByo) docValues false,
       booleanField(analysed) docValues false,
-      keywordField(whiteUser) docValues false,
-      keywordField(blackUser) docValues false,
+      keywordField(senteUser) docValues false,
+      keywordField(goteUser) docValues false,
       keywordField(source) docValues false
     )
 }
@@ -71,8 +73,8 @@ case class Query(
     clock: Clocking = Clocking(),
     sorting: Sorting = Sorting.default,
     analysed: Option[Boolean] = None,
-    whiteUser: Option[String] = None,
-    blackUser: Option[String] = None
+    senteUser: Option[String] = None,
+    goteUser: Option[String] = None
 ) extends lila.search.Query {
 
   val timeout = 5 seconds
@@ -95,6 +97,7 @@ case class Query(
     duration queries Fields.duration,
     clock.init queries Fields.clockInit,
     clock.inc queries Fields.clockInc,
+    clock.byo queries Fields.clockByo,
     date map Date.formatter.print queries Fields.date,
     hasAiQueries,
     (hasAi | true).fold(aiLevel queries Fields.ai, Nil),
@@ -103,8 +106,8 @@ case class Query(
     toQueries(rated, Fields.rated),
     toQueries(status, Fields.status),
     toQueries(analysed, Fields.analysed),
-    toQueries(whiteUser, Fields.whiteUser),
-    toQueries(blackUser, Fields.blackUser)
+    toQueries(senteUser, Fields.senteUser),
+    toQueries(goteUser, Fields.goteUser)
   ).flatten match {
     case Nil     => matchAllQuery()
     case queries => boolQuery().must(queries)
@@ -154,9 +157,12 @@ case class Clocking(
     initMin: Option[Int] = None,
     initMax: Option[Int] = None,
     incMin: Option[Int] = None,
-    incMax: Option[Int] = None
+    incMax: Option[Int] = None,
+    byoMin: Option[Int] = None,
+    byoMax: Option[Int] = None,
 ) {
 
   def init = Range(initMin, initMax)
   def inc  = Range(incMin, incMax)
+  def byo  = Range(byoMin, byoMax)
 }
