@@ -1,3 +1,3 @@
-### Search service for lichess.org
+### Search service for lishogi.org
 
-> "Keep elasticsearch threads out of your web facing app, kids" -- W. Churchill
+> "Keep elasticsearch threads out of your web facing app, kids" -- A. Einstein
