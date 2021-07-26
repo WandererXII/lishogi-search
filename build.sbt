@@ -1,10 +1,10 @@
-name := """lila-search"""
+name := """lishogi-search"""
 
 version := "2.0"
 
 scalaVersion := "2.13.6"
 
-lazy val `lila-search` = project.in(file("."))
+lazy val `lishogi-search` = project.in(file("."))
   .enablePlugins(PlayScala)
   .disablePlugins(PlayFilters)
 
@@ -61,7 +61,7 @@ libraryDependencies ++= Seq(
   specs2 % Test
 )
 
-resolvers += "lila-maven" at "https://raw.githubusercontent.com/ornicar/lila-maven/master"
+resolvers += "lishogi-maven" at "https://raw.githubusercontent.com/ornicar/lila-maven/master"
 
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.

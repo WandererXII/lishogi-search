@@ -1,6 +1,6 @@
 import play.api._
 import play.api.routing.Router
-import lila.search.ESClient
+import lishogi.search.ESClient
 import com.sksamuel.elastic4s.http.JavaClient
 import com.sksamuel.elastic4s.{ ElasticClient, ElasticProperties }
 

@@ -1,4 +1,4 @@
-package lila.search
+package lishogi.search
 package forum
 
 import com.sksamuel.elastic4s.ElasticDsl._
@@ -26,7 +26,7 @@ object Mapping {
     )
 }
 
-case class Query(text: String, troll: Boolean) extends lila.search.Query {
+case class Query(text: String, troll: Boolean) extends lishogi.search.Query {
 
   def searchDef(from: From, size: Size) =
     index =>

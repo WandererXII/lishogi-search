@@ -1,4 +1,4 @@
-package lila.search
+package lishogi.search
 package game
 
 import org.joda.time.DateTime
@@ -75,7 +75,7 @@ case class Query(
     analysed: Option[Boolean] = None,
     senteUser: Option[String] = None,
     goteUser: Option[String] = None
-) extends lila.search.Query {
+) extends lishogi.search.Query {
 
   val timeout = 5 seconds
 

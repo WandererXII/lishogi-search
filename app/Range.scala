@@ -1,4 +1,4 @@
-package lila.search
+package lishogi.search
 
 import com.sksamuel.elastic4s.ElasticDsl._
 

@@ -1,4 +1,4 @@
-package lila
+package lishogi
 
 import ornicar.scalalib.Zero
 import scala.concurrent.Future
@@ -22,7 +22,7 @@ package object search {
   def fufail[A](a: String): Fu[A]            = fufail(new Exception(a))
   val funit                                  = fuccess(())
 
-  implicit final class LilaPimpedFuture[A](fua: Fu[A]) {
+  implicit final class LishogiPimpedFuture[A](fua: Fu[A]) {}
 
     def >>-(sideEffect: => Unit)(implicit ec: ExecutionContext): Fu[A] =
       fua andThen {
@@ -36,14 +36,14 @@ package object search {
     def inject[B](b: => B)(implicit ec: ExecutionContext): Fu[B] = fua map (_ => b)
   }
 
-  implicit class LilaPimpedBoolean(self: Boolean) {
+  implicit class LishogiPimpedBoolean(self: Boolean) {
 
     def fold[A](t: => A, f: => A): A = if (self) t else f
 
     def option[A](a: => A): Option[A] = if (self) Some(a) else None
   }
 
-  implicit class LilaPimpedOption[A](self: Option[A]) {
+  implicit class LishogiPimpedOption[A](self: Option[A]) {
 
     def |(a: => A): A = self getOrElse a
 

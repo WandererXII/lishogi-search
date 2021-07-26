@@ -1,4 +1,4 @@
-package lila.search
+package lishogi.search
 
 import play.api.libs.json._
 import com.sksamuel.elastic4s.Index
